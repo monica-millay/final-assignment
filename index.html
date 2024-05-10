@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Title that goes on tab-->
+
+<head>
+  <meta charset="utf-8">
+  <title>Evictions in Bushwick</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- map -->
+  <div id="map-container"></div>
+  <!-- sidebar -->
+  <div id="console">
+    <!-- header and explainer text -->
+    <h1>Evictions in Bushwick (2017-2023)</h1>
+    <h3> This map shows the effect of the COVID-19 pandemic and New York's consequent <a href="https://www.nysenate.gov/legislation/bills/2019/S8192" target="_blank">eviction moratorium</a> on the Brooklyn neighborhood of Bushwick.
+    </h3>
+    <h3>Tenants who experienced financial hardship due to COVID-19 were protected from eviction from March 7, 2020 through January 15, 2022.</h3>
+    <h3>Each resdiential eviction carried out by a City Marshall is represented by a dot. Move the slider below to see year-to-year trends. </h3>
+    <!-- slider -->
+    <div class="session" id="sliderbar">
+      <h2>Year: <label id="slider-year-label">2017</label></h2>
+      <input id="slider" class="row" type="range" min="2017" max="2023" step="1" value="2017" />
+    </div>
+    <p> <a href="https://data.cityofnewyork.us/City-Government/Evictions/6z8x-wfk4/about_data" target="_blank">Data Source</a> | 
+      <a href="https://colab.research.google.com/drive/1mQNZ1t923709twkvkEiIIiKUiPnMfhHh?usp=sharing" target="_blank">Data Cleaning</a></p> 
+    <p><a href="https://github.com/monica-millay/assignment-4" target="_blank">Map Source Code</a></p>
+  </div>
+
+  <!-- Pull in map, JS, etc.-->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+  <script src="js/scripts.js"></script>
+  <script src="evictions.geojson"></script>
+
+</body>
+
+</html>

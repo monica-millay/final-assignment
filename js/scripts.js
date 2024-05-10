@@ -23,6 +23,11 @@ const map = new mapboxgl.Map(mapOptions);
 const nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-right');
 
+// Create a popup, but don't add it to the map yet.
+const popup = new mapboxgl.Popup({
+    closeButton: false
+});
+
 map.on('load', () => {
     // set default year to 2017
     let filterYear = ['==', ['number', ['get', 'Year']], 2017];
@@ -39,6 +44,28 @@ map.on('load', () => {
         'filter': ['all', filterYear]
     });
 });
+
+map.on('mousemove', 'evictions', (e) => {
+    // Change the cursor style as a UI indicator.
+    map.getCanvas().style.cursor = 'pointer';
+
+    // Use the first found feature.
+    const feature = e.features[0];
+
+
+                // Display a popup with the name of the county.
+                popup
+                .setLngLat(e.lngLat)
+                .setText(feature.properties.COUNTY)
+                .addTo(map);
+        });
+        
+
+    map.on('mouseleave', 'evictions', () => {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+            overlay.style.display = 'none';
+        });
 
 // The sliderbar code came from a mapbox tutorial: https://docs.mapbox.com/help/tutorials/show-changes-over-time/#add-a-time-slider
 // update year filter when the slider is dragged

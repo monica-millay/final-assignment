@@ -38,36 +38,75 @@ map.on('load', () => {
         type: 'circle',
         source: {
             type: 'geojson',
-            data: './evictions.geojson'
+            data: './data/evictions.geojson'
+        },
+        paint:{
+            // make circles smaller as the user zooms from min z13 to z22.
+            'circle-radius': {
+                'base': 1.75,
+                'stops': [
+                    [13, 3.5],
+                    [22, 180]
+                ]
+            },
+            'circle-color':'#000000', // circle color is black
+
         },
         // filter by year
         'filter': ['all', filterYear]
     });
+    
+    // per Prof's feedback, add "mask" to subdue the areas outside Bushwick (using geoJSON with Bushwick filtered out)
+    map.addLayer({
+        id: 'mask',
+        type: 'fill',
+        source: {
+            type: 'geojson',
+            data: './data/mask.geojson'
+        },
+        layout: {},
+        paint:{
+            'fill-color': '#f7f7f7', // same gray as basemap
+            'fill-opacity': 0.6
+            } 
+    }, 
+    'state-label' //put fill over labels for nearby neighborhoods like Ridgewood
+    );
+
+    console.log(
+        map.getStyle().layers
+    )
 });
 
+
+
+// Code to add popup when user hovers over a circle came from mapbox: https://docs.mapbox.com/mapbox-gl-js/example/query-similar-features/
+
 map.on('mousemove', 'evictions', (e) => {
-    // Change the cursor style as a UI indicator.
+    // change the cursor style as a UI indicator.
     map.getCanvas().style.cursor = 'pointer';
 
-    // Use the first found feature.
+    // use the first found feature.
     const feature = e.features[0];
 
-
-                // Display a popup with the name of the county.
+                // display a popup with the street address.
                 popup
                 .setLngLat(e.lngLat)
-                .setText(feature.properties.COUNTY)
+                .setText(feature.properties.Address)
                 .addTo(map);
-        });
+            });
         
 
     map.on('mouseleave', 'evictions', () => {
             map.getCanvas().style.cursor = '';
             popup.remove();
             overlay.style.display = 'none';
+            
         });
 
-// The sliderbar code came from a mapbox tutorial: https://docs.mapbox.com/help/tutorials/show-changes-over-time/#add-a-time-slider
+
+// This sliderbar code came from a mapbox tutorial: https://docs.mapbox.com/help/tutorials/show-changes-over-time/#add-a-time-slider
+
 // update year filter when the slider is dragged
 document.getElementById('slider').addEventListener('input', (event) => {
     const year = parseInt(event.target.value);

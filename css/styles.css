@@ -11,19 +11,24 @@ body {
     width: 100%;
   }
 
+  /* header at top of console */
   h1 {
+    font-family: Montserrat; /* Google font */
     font-size: 20px;
     line-height: 30px;
     font-weight: strong;
   }
 
+  /* Year label */
   h2 {
+    font-family: Montserrat; /* Google font */
     font-size: 16px;
     line-height: 20px;
     margin-bottom: 10px;
     font-weight: strong;
   }
 
+  /* description in console */
   h3 {
     font-size: 16px;
     line-height: 20px;
@@ -31,6 +36,7 @@ body {
     font-weight: normal;
   }
 
+  /* links and popups */
   p {
     font-size: 12px;
     line-height: 10px;
@@ -49,17 +55,17 @@ body {
     width: 240px;
     background-color: white;
     padding: 10px 20px;
-     /*add outline to console per Prof's reccommendation*/
+     /* add outline to console per Prof's reccommendation */
      outline-style: solid;
     outline-color: black;
     outline-width: 2px;
-     /*round corners*/
+     /* round corners */
     border-radius: 25px;
-     /*blurred shadow*/
+     /* blurred shadow */
     box-shadow: 5px 5px 2.5px black;
   }
 
-  /*slider bar*/
+  /* slider bar */
   .session {
     margin-bottom: 20px;
   }

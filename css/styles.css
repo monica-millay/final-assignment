@@ -1,82 +1,94 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
 
-  #map-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-  }
+#map-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
 
-  /* header at top of console */
-  h1 {
-    font-family: Montserrat; /* Google font */
-    font-size: 20px;
-    line-height: 30px;
-    font-weight: strong;
-  }
+/* header at top of console */
+h1 {
+  font-family: Montserrat;
+  /* Google font */
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: strong;
+}
 
-  /* Year label */
-  h2 {
-    font-family: Montserrat; /* Google font */
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 10px;
-    font-weight: strong;
-  }
+/* Year label */
+h2 {
+  font-family: Montserrat;
+  /* Google font */
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  font-weight: strong;
+}
 
-  /* description in console */
-  h3 {
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 10px;
-    font-weight: normal;
-  }
+/* description in console */
+h3 {
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
 
-  /* links and popups */
-  p {
-    font-size: 12px;
-    line-height: 10px;
-    margin-bottom: 5px;
-    font-weight: normal;
-  }
+/* links */
+p {
+  font-size: 12px;
+  line-height: 5px;
+  margin-bottom: 1px;
+  font-weight: normal;
+}
 
-  a {
-    text-decoration: none;
-    color: #2dc4b2;
-  }
+a {
+  text-decoration: none;
+  color: #2dc4b2;
+  /* I know this is just the default color from Mapbox 
+    I tried a bunch of other ones and none looked as good! */
+}
 
-  #console {
-    position: absolute;
-    margin: 10px;
-    width: 240px;
-    background-color: white;
-    padding: 10px 20px;
-     /* add outline to console per Prof's reccommendation */
-     outline-style: solid;
-    outline-color: black;
-    outline-width: 2px;
-     /* round corners */
-    border-radius: 25px;
-     /* blurred shadow */
-    box-shadow: 5px 5px 2.5px black;
-  }
+/* popups */
+.mapboxgl-popup-content {
+  /* smaller than headers but larger than links */
+  font-size: 14px; 
+  line-height: 7px;
+  font-weight: normal;
+}
 
-  /* slider bar */
-  .session {
-    margin-bottom: 20px;
-  }
+#console {
+  position: absolute;
+  margin: 10px;
+  width: 240px;
+  background-color: white;
+  padding: 10px 20px;
+  /* add outline to console per Prof's reccommendation */
+  outline-style: solid;
+  outline-color: black;
+  outline-width: 2px;
+  /* round corners */
+  border-radius: 25px;
+  /* blurred shadow */
+  box-shadow: 5px 5px 2.5px black;
+}
 
-  .row {
-    height: 12px;
-    width: 100%;
-  }
+/* slider bar */
+.session {
+  margin-bottom: 20px;
+}
 
-  .label {
-    width: 15%;
-    display: inline-block;
-    text-align: center;
-  }
+.row {
+  height: 12px;
+  width: 100%;
+}
+
+.label {
+  width: 15%;
+  display: inline-block;
+  text-align: center;
+}

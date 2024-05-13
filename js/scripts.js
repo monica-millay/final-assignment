@@ -1,9 +1,10 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWNhLW1pbGxheSIsImEiOiJjbHV1ZWszeWEwOHlhMnBtcjYyZjd6dmZwIn0.RYKZY8Ym236tnkj4hxTbpg';
 
 // add bounding box, so user cannot leave Bushwick
+//Per Prof's feedback, made this a little bigger
 const bounds = [
-    [-73.95224, 40.67692], // Southwest coordinates
-    [-73.89984, 40.71456] // Northeast coordinates
+    [-74.00358, 40.66094], // Southwest coordinates
+    [-73.83485, 40.72553] // Northeast coordinates
 ];
 
 // add in options for map (style, center point, zoom level, bounds, etc.)
@@ -11,9 +12,9 @@ var mapOptions = {
     container: 'map-container', // container ID
     style: 'mapbox://styles/mapbox/light-v11', // plain/light basemap
     center: [-73.92579, 40.69803], // starting position [lng, lat]
-    zoom: 13.25, // starting zoom
+    zoom: 13.5, // starting zoom
     maxBounds: bounds, // set the map's geographical boundaries to just Bushwick
-    minZoom: 13 //set min Zoom level, so user cannot Zoom out/leave Bushwick
+    minZoom: 12 //set min Zoom level, so user cannot Zoom out/leave Bushwick
 }
 
 // instantiate the map
@@ -38,7 +39,8 @@ map.on('load', () => {
         type: 'circle',
         source: {
             type: 'geojson',
-            data: './data/evictions.geojson'
+            data: './data/evictions.geojson',
+            generateId: true // necessary to use featureState for hover
         },
         paint:{
             // make circles smaller as the user zooms from min z13 to z22.
@@ -49,8 +51,12 @@ map.on('load', () => {
                     [22, 180]
                 ]
             },
-            'circle-color':'#000000', // circle color is black
-
+            'circle-color':[
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                '#aa5e79',  // circle turns red when user hovers
+                '#000000'// default circle color is black
+            ]
         },
         // filter by year
         'filter': ['all', filterYear]
@@ -72,17 +78,36 @@ map.on('load', () => {
     }, 
     'state-label' //put fill over labels for nearby neighborhoods like Ridgewood
     );
-
-    console.log(
-        map.getStyle().layers
-    )
 });
 
 
 
 // Code to add popup when user hovers over a circle came from mapbox: https://docs.mapbox.com/mapbox-gl-js/example/query-similar-features/
 
+// this is a variable to store the id of the feature that is currently being hovered.
+let hoveredCircleId = null
+
 map.on('mousemove', 'evictions', (e) => {
+
+     // don't do anything if there are no features from this layer under the mouse pointer
+     if (e.features.length > 0) {
+        // if hoveredCircleId already has an id in it, set the featureState for that id to hover: false
+        if (hoveredCircleId !== null) {
+            map.setFeatureState(
+                { source: 'evictions', id: hoveredCircleId },
+                { hover: false }
+            );
+        }
+
+        // set hoveredCircleId to the id of the feature currently being hovered
+        hoveredCircleId = e.features[0].id;
+
+        // set the featureState of this feature to hover:true
+        map.setFeatureState(
+            { source: 'evictions', id: hoveredCircleId },
+            { hover: true }
+        );
+    
     // change the cursor style as a UI indicator.
     map.getCanvas().style.cursor = 'pointer';
 
@@ -93,17 +118,27 @@ map.on('mousemove', 'evictions', (e) => {
                 popup
                 .setLngLat(e.lngLat)
                 .setText(feature.properties.Address)
-                .addTo(map);
-            });
-        
+                .addTo(map);       
+    
 
     map.on('mouseleave', 'evictions', () => {
+
+        if (hoveredCircleId !== null) {
+            map.setFeatureState(
+                { source: 'evictions', id: hoveredCircleId },
+                { hover: false }
+            );
+        }
+
+        // clear hoveredCircleId
+        hoveredCircleId = null;
+
             map.getCanvas().style.cursor = '';
             popup.remove();
-            overlay.style.display = 'none';
             
-        });
-
+        });   
+    }
+});
 
 // This sliderbar code came from a mapbox tutorial: https://docs.mapbox.com/help/tutorials/show-changes-over-time/#add-a-time-slider
 

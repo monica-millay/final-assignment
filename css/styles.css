@@ -80,6 +80,7 @@ a {
 /* slider bar */
 .session {
   margin-bottom: 20px;
+  margin-right: 20px; /* add margin so slider bar and chart line up */
 }
 
 .row {

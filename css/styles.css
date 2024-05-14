@@ -20,13 +20,13 @@ h1 {
   font-weight: strong;
 }
 
-/* Year label */
+/* labels above slider for year and eviction count */
 h2 {
   font-family: Montserrat;
   /* Google font */
   font-size: 16px;
-  line-height: 20px;
-  margin-bottom: 10px;
+  line-height: 10px;
+  margin-bottom: 15px;
   font-weight: strong;
 }
 
@@ -38,11 +38,17 @@ h3 {
   font-weight: normal;
 }
 
+br {
+  display: block; /* makes it have a width */
+  content: ""; /* clears default height */
+  margin-top: 30px; /* height for break between description and slider labels */
+}
+
 /* links */
 p {
   font-size: 12px;
   line-height: 5px;
-  margin-bottom: 1px;
+  margin-bottom: 5px;
   font-weight: normal;
 }
 
@@ -80,7 +86,7 @@ a {
 /* slider bar */
 .session {
   margin-bottom: 20px;
-  margin-right: 20px; /* add margin so slider bar and chart line up */
+  padding-right: 55px; /* add padding so slider bar and chart line up */
 }
 
 .row {

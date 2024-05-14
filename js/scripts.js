@@ -62,6 +62,25 @@ map.on('load', () => {
         'filter': ['all', filterYear]
     });
     
+     // per Prof's feedback, add outline of Bushwick. I didn't want a super harsh outline, so I blurred and offset
+     map.addLayer({
+        id: 'ouline',
+        type: 'line',
+        source: {
+            type: 'geojson',
+            data: './data/1.geojson'
+        },
+        layout: {},
+        paint:{
+            'line-color': '#949494', // slightly darker gray than basemap
+            'line-width': 3,
+            'line-blur': 3,
+            'line-offset': -2 // offset by 2 pixel, so blends in with mask
+            } 
+    }, 
+    'state-label' //put fill over labels for nearby neighborhoods like Ridgewood
+    );
+
     // per Prof's feedback, add "mask" to subdue the areas outside Bushwick (using geoJSON with Bushwick filtered out)
     map.addLayer({
         id: 'mask',
@@ -79,7 +98,6 @@ map.on('load', () => {
     'state-label' //put fill over labels for nearby neighborhoods like Ridgewood
     );
 });
-
 
 
 // Code to add popup when user hovers over a circle came from mapbox: https://docs.mapbox.com/mapbox-gl-js/example/query-similar-features/
@@ -141,6 +159,7 @@ map.on('mousemove', 'evictions', (e) => {
 });
 
 // This sliderbar code came from a mapbox tutorial: https://docs.mapbox.com/help/tutorials/show-changes-over-time/#add-a-time-slider
+// (I also borrowed a bit from the color scheme, since I really struggled to pick nice colors by myself!!)
 
 // update year filter when the slider is dragged
 document.getElementById('slider').addEventListener('input', (event) => {
@@ -151,8 +170,32 @@ document.getElementById('slider').addEventListener('input', (event) => {
     filterYear = ['==', ['number', ['get', 'Year']], year];
     map.setFilter('evictions', ['all', filterYear]);
 
-    // update text when user moves slider
+    // update year label when user moves slider
     document.getElementById('slider-year-label').innerText = year;
+
+    // update eviction count below year label when user moves slider
+    if (year == 2017) {
+        document.getElementById('evictions-count').innerText = '232 Evictions'
+    };
+    if (year == 2018) {
+        document.getElementById('evictions-count').innerText = '202 Evictions'
+    };
+    if (year == 2019) {
+        document.getElementById('evictions-count').innerText = '186 Evictions'
+    };
+    if (year == 2020) {
+        document.getElementById('evictions-count').innerText = '31 Evictions'
+    };
+    if (year == 2021) {
+        document.getElementById('evictions-count').innerText = '1 Eviction'
+    };
+    if (year == 2022) {
+        document.getElementById('evictions-count').innerText = '87 Evictions'
+    };
+    if (year == 2023) {
+        document.getElementById('evictions-count').innerText = '202 Evictions'
+    };
+
 });
 
 

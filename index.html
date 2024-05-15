@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Title that goes on tab-->
-
 <head>
   <meta charset="utf-8">
+  <!-- title that goes on tab-->
   <title>Evictions in Bushwick</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
   <!-- Google font links-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Freeman&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
   <!-- Google font end-->
   <link href="css/styles.css" rel="stylesheet">
 </head>
@@ -24,32 +25,50 @@
   <div id="console">
     <!-- header and explainer text -->
     <h1>Evictions in Bushwick (2017-2023)</h1>
-    <h3> This map shows the effect of the COVID-19 pandemic and New York's consequent <a href="https://www.nysenate.gov/legislation/bills/2019/S8192" target="_blank">eviction moratorium</a> on the Brooklyn neighborhood of Bushwick.
+    <h3> This map shows the effect of the COVID-19 pandemic and New York's consequent <a
+        href="https://www.nysenate.gov/legislation/bills/2019/S8192" target="_blank">eviction moratorium</a> on the
+      Brooklyn neighborhood of Bushwick.
     </h3>
-    <h3>Tenants who experienced financial hardship due to COVID-19 were protected from eviction from March 7, 2020 through January 15, 2022.</h3>
-    <h3>Each resdiential eviction carried out by a City Marshall is represented by a dot. Hover to see the street address.</h3> 
+    <h3>Tenants who experienced financial hardship due to COVID-19 were protected from eviction from March 7, 2020
+      through January 15, 2022.</h3>
+    <h3>Each resdiential eviction carried out by a City Marshall is represented by a dot. Hover to see the street
+      address.</h3>
     <h3>Move the slider below to see year-to-year trends.</h3>
     <br>
-    
+
     <!-- slider -->
     <div class="session" id="sliderbar">
-      <h2>Year: <label id="slider-year-label">2017</label></h2> 
+      <h2>Year: <label id="slider-year-label">2017</label></h2>
       <h2><label id="evictions-count">232 Evictions</label></h2>
-      <input id="slider" class="row" type="range" min="2017" max="2023" step="1" value="2017"/>
-          </div>
-    <div>
-    <iframe title="" aria-label="Interactive line chart" id="datawrapper-chart-FQQr6" src="https://datawrapper.dwcdn.net/FQQr6/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="172" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r=0;r<e.length;r++)if(e[r].contentWindow===a.source){var i=a.data["datawrapper-height"][t]+"px";e[r].style.height=i}}}))}();
-    </script>
+      <input id="slider" class="row" type="range" min="2017" max="2023" step="1" value="2017" />
     </div>
-    <p> <a href="https://data.cityofnewyork.us/City-Government/Evictions/6z8x-wfk4/about_data" target="_blank">Data Source</a> | 
-      <a href="https://colab.research.google.com/drive/1mQNZ1t923709twkvkEiIIiKUiPnMfhHh?usp=sharing" target="_blank">Data Cleaning</a></p> 
-    <p><a href="https://github.com/monica-millay/final-assignment" target="_blank">Map Source Code</a></p>
+
+    <!-- chart -->
+    <!-- Per Prof feedback, add chart that lines up with slider -->
+    <div>
+      <iframe title="" aria-label="Interactive line chart" id="datawrapper-chart-FQQr6"
+        src="https://datawrapper.dwcdn.net/FQQr6/1/" scrolling="no" frameborder="0"
+        style="width: 0; min-width: 100% !important; border: none;" height="172" data-external="1"></iframe>
+      <script type="text/javascript">!function () { "use strict"; window.addEventListener("message", (function (a) { if (void 0 !== a.data["datawrapper-height"]) { var e = document.querySelectorAll("iframe"); for (var t in a.data["datawrapper-height"]) for (var r = 0; r < e.length; r++)if (e[r].contentWindow === a.source) { var i = a.data["datawrapper-height"][t] + "px"; e[r].style.height = i } } })) }();
+      </script>
+    </div>
+
+    <!-- links for sources -->
+    <p> <a href="https://data.cityofnewyork.us/City-Government/Evictions/6z8x-wfk4/about_data" 
+        target="_blank">Data Source</a> |
+      <a href="https://colab.research.google.com/drive/1mQNZ1t923709twkvkEiIIiKUiPnMfhHh?usp=sharing"
+        target="_blank">Data Cleaning</a>
+    </p>
+    <p><a href="https://github.com/monica-millay/final-assignment" 
+      target="_blank">Map Source Code</a></p>
   </div>
 
   <!-- Pull in map, JS, etc.-->
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
   <script src="js/scripts.js"></script>
   <script src="data/evictions.geojson"></script>
+  <script src="data/ouline.geojson"></script>
+  <script src="data/mask.geojson"></script>
 
 </body>
 

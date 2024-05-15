@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWNhLW1pbGxheSIsImEiOiJjbHV1ZWszeWEwOHlhMnBtcjYyZjd6dmZwIn0.RYKZY8Ym236tnkj4hxTbpg';
 
 // add bounding box, so user cannot leave Bushwick
-//Per Prof's feedback, made this a little bigger
+// per Prof's feedback, made this a little bigger
 const bounds = [
     [-74.00358, 40.66094], // Southwest coordinates
     [-73.83485, 40.72553] // Northeast coordinates
@@ -20,11 +20,11 @@ var mapOptions = {
 // instantiate the map
 const map = new mapboxgl.Map(mapOptions);
 
-// add a navitation control
+// add a navitation control (zoom, north arrow)
 const nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-right');
 
-// Create a popup, but don't add it to the map yet.
+// create a popup, but don't add it to the map yet.
 const popup = new mapboxgl.Popup({
     closeButton: false
 });
@@ -42,43 +42,43 @@ map.on('load', () => {
             data: './data/evictions.geojson',
             generateId: true // necessary to use featureState for hover
         },
-        paint:{
-            // make circles smaller as the user zooms from min z13 to z22.
+        paint: {
+            // make circles smaller as the user zooms from min z12 to z22.
             'circle-radius': {
                 'base': 1.75,
                 'stops': [
-                    [13, 3.5],
+                    [12, 3.25],
                     [22, 180]
                 ]
             },
-            'circle-color':[
+            'circle-color': [
                 'case',
                 ['boolean', ['feature-state', 'hover'], false],
-                '#aa5e79',  // circle turns red when user hovers
+                '#aa5e79',  // circle turns purple/red when user hovers
                 '#000000'// default circle color is black
             ]
         },
         // filter by year
         'filter': ['all', filterYear]
     });
-    
-     // per Prof's feedback, add outline of Bushwick. I didn't want a super harsh outline, so I blurred and offset
-     map.addLayer({
+
+    // per Prof's feedback, add outline of Bushwick. I didn't want a super harsh outline, so I blurred and offset
+    map.addLayer({
         id: 'ouline',
         type: 'line',
         source: {
             type: 'geojson',
-            data: './data/1.geojson'
+            data: './data/outline.geojson'
         },
         layout: {},
-        paint:{
+        paint: {
             'line-color': '#949494', // slightly darker gray than basemap
             'line-width': 3,
             'line-blur': 3,
             'line-offset': -2 // offset by 2 pixel, so blends in with mask
-            } 
-    }, 
-    'state-label' //put fill over labels for nearby neighborhoods like Ridgewood
+        }
+    },
+        'state-label' //put fill over labels for nearby neighborhoods like Ridgewood
     );
 
     // per Prof's feedback, add "mask" to subdue the areas outside Bushwick (using geoJSON with Bushwick filtered out)
@@ -90,25 +90,26 @@ map.on('load', () => {
             data: './data/mask.geojson'
         },
         layout: {},
-        paint:{
+        paint: {
             'fill-color': '#f7f7f7', // same gray as basemap
             'fill-opacity': 0.6
-            } 
-    }, 
-    'state-label' //put fill over labels for nearby neighborhoods like Ridgewood
+        }
+    },
+        'state-label' //put fill over labels for nearby neighborhoods like Ridgewood
     );
 });
 
 
-// Code to add popup when user hovers over a circle came from mapbox: https://docs.mapbox.com/mapbox-gl-js/example/query-similar-features/
+// code to add popup when user hovers over a circle came from mapbox: https://docs.mapbox.com/mapbox-gl-js/example/query-similar-features/
 
 // this is a variable to store the id of the feature that is currently being hovered.
 let hoveredCircleId = null
 
 map.on('mousemove', 'evictions', (e) => {
 
-     // don't do anything if there are no features from this layer under the mouse pointer
-     if (e.features.length > 0) {
+    // this code came from the Prof's class 5 demo
+    // don't do anything if there are no features from this layer under the mouse pointer
+    if (e.features.length > 0) {
         // if hoveredCircleId already has an id in it, set the featureState for that id to hover: false
         if (hoveredCircleId !== null) {
             map.setFeatureState(
@@ -125,36 +126,39 @@ map.on('mousemove', 'evictions', (e) => {
             { source: 'evictions', id: hoveredCircleId },
             { hover: true }
         );
-    
-    // change the cursor style as a UI indicator.
-    map.getCanvas().style.cursor = 'pointer';
 
-    // use the first found feature.
-    const feature = e.features[0];
+        // change the cursor style as a UI indicator
+        map.getCanvas().style.cursor = 'pointer';
 
-                // display a popup with the street address.
-                popup
-                .setLngLat(e.lngLat)
-                .setText(feature.properties.Address)
-                .addTo(map);       
-    
+        // use the first found feature.
+        const feature = e.features[0];
 
-    map.on('mouseleave', 'evictions', () => {
+        // display a popup with the street address
+        popup
+            .setLngLat(e.lngLat)
+            .setText(feature.properties.Address)
+            .addTo(map);
 
-        if (hoveredCircleId !== null) {
-            map.setFeatureState(
-                { source: 'evictions', id: hoveredCircleId },
-                { hover: false }
-            );
-        }
+        // set hover: false when user leaves the feature
+        map.on('mouseleave', 'evictions', () => {
 
-        // clear hoveredCircleId
-        hoveredCircleId = null;
+            if (hoveredCircleId !== null) {
+                map.setFeatureState(
+                    { source: 'evictions', id: hoveredCircleId },
+                    { hover: false }
+                );
+            }
 
+            // clear hoveredCircleId
+            hoveredCircleId = null;
+
+            // change cursor back to default
             map.getCanvas().style.cursor = '';
+
+            // close out popup
             popup.remove();
-            
-        });   
+
+        });
     }
 });
 

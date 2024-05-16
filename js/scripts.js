@@ -47,7 +47,7 @@ map.on('load', () => {
             'circle-radius': {
                 'base': 1.75,
                 'stops': [
-                    [12, 3.25],
+                    [12, 3],
                     [22, 180]
                 ]
             },
@@ -72,9 +72,9 @@ map.on('load', () => {
         },
         layout: {},
         paint: {
-            'line-color': '#949494', // slightly darker gray than basemap
+            'line-color': '#313131', // darker gray than basemap
             'line-width': 3,
-            'line-blur': 3,
+            'line-blur': 2,
             'line-offset': -2 // offset by 2 pixel, so blends in with mask
         }
     },
@@ -92,7 +92,7 @@ map.on('load', () => {
         layout: {},
         paint: {
             'fill-color': '#f7f7f7', // same gray as basemap
-            'fill-opacity': 0.6
+            'fill-opacity': 0.7
         }
     },
         'state-label' //put fill over labels for nearby neighborhoods like Ridgewood
@@ -202,4 +202,22 @@ document.getElementById('slider').addEventListener('input', (event) => {
 
 });
 
+// I added top:0 and bottom:0 to the console
+// This code is to adjust the height of the console to fit the text and charts. 
+// I got it from chat GPT. It kind of works unless you resize your screen by dragging.
+var consoleElement = document.getElementById("console");
 
+// create function to adjust console height
+function adjustConsoleHeight() {
+    // get the total height of the content inside the console, including any overflow
+    var contentHeight = consoleElement.scrollHeight;
+
+    // set the height of the console to match the content height
+    consoleElement.style.height = contentHeight + "px";
+}
+
+// call the function initially
+adjustConsoleHeight();
+
+// call the function whenever the window is resized (in case content dimensions change)
+window.addEventListener("resize", adjustConsoleHeight);

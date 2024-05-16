@@ -201,23 +201,3 @@ document.getElementById('slider').addEventListener('input', (event) => {
     };
 
 });
-
-// I added top:0 and bottom:0 to the console
-// This code is to adjust the height of the console to fit the text and charts. 
-// I got it from chat GPT. It kind of works unless you resize your screen by dragging.
-var consoleElement = document.getElementById("console");
-
-// create function to adjust console height
-function adjustConsoleHeight() {
-    // get the total height of the content inside the console, including any overflow
-    var contentHeight = consoleElement.scrollHeight;
-
-    // set the height of the console to match the content height
-    consoleElement.style.height = contentHeight + "px";
-}
-
-// call the function initially
-adjustConsoleHeight();
-
-// call the function whenever the window is resized (in case content dimensions change)
-window.addEventListener("resize", adjustConsoleHeight);

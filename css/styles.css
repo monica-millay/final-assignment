@@ -89,8 +89,6 @@ a {
   box-shadow: 5px 5px 2.5px #000000;
   /* this should prevent awkward white space below the map*/
   max-height: 95%;
-  top: 0;
-  bottom: 0;
   overflow: auto;
 }
 

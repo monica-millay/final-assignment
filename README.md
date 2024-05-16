@@ -3,7 +3,7 @@
 This is the repo for <a href="https://monica-millay.github.io/final-assignment/" target="_blank">Evictions in Bushwick (2017-2023)</a> <br>
 URL: https://monica-millay.github.io/final-assignment/
 
-This map shows the effect of the COVID-19 pandemic and New York's consequent eviction moratorium on the Brooklyn neighborhood of Bushwick. (Tenants who experienced financial hardship due to COVID-19 were protected from eviction from March 7, 2020 through January 15, 2022.) <strong>The map reveals that the pandemic and moratorium caused a dramatic, but temporary, decrease in legal evictions in the neighborhood.</strong> Each resdential eviction carried out by a City Marshal is represented by a dot. 
+This map shows the effect of the COVID-19 pandemic and New York's consequent eviction moratorium on the Brooklyn neighborhood of Bushwick. (Tenants who experienced financial hardship due to COVID-19 were protected from eviction from March 7, 2020 through January 15, 2022.) <strong>The map reveals that the pandemic and moratorium caused a dramatic, but temporary, decrease in legal evictions in the neighborhood.</strong> Each residential eviction carried out by a City Marshal is represented by a dot. 
 
 Interact with the map by:<br>
 -hovering over the dots to see the street addresses.<br>

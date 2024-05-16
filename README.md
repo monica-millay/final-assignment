@@ -9,7 +9,8 @@ Interact with the map by:<br>
 -hovering over the dots to see the street addresses.<br>
 -moving the slider bar to see year-to-year trends.<br>
 
-<img width="2233" alt="Screenshot 2024-05-15 at 11 17 39 PM" src="https://github.com/monica-millay/final-assignment/assets/165329154/3b6c87b5-d9f8-4adb-955a-1b5048cbc3c3"><br>
+<img width="1313" alt="Screenshot 2024-05-16 at 9 29 12 AM" src="https://github.com/monica-millay/final-assignment/assets/165329154/d96259c0-ad35-42b6-ad11-86cdfe5388a8">
+
 
 <strong>Sources:</strong><br>
 I obtained the eviction data from <a href="https://data.cityofnewyork.us/City-Government/Evictions/6z8x-wfk4/about_data" target="_blank">NYC Open Data</a> and cleaned it using Python in <a href="https://colab.research.google.com/drive/1mQNZ1t923709twkvkEiIIiKUiPnMfhHh?usp=sharing" target="_blank">Google colabs</a>. The data comes from the Department of Investigation (DOI).
